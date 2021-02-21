@@ -1,17 +1,17 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 pub enum TwError {
     InvalidCoordinates,
     NoDataAvailableForTheGivenCoordinateAndRadius,
     NoDataAvailableForSpecifiedId,
-    YouMustProvideValidCoordinatesIpAddressQueryOrAttributes{status_code: u16},
+    YouMustProvideValidCoordinatesIpAddressQueryOrAttributes { status_code: u16 },
     NoLocationAssociatedWithTheSpecifiedIpAddress,
     NoUserMatchesForSpecifiedTerms,
     QueryParametersAreMissing,
     CouldNotAuthenticateYou,
     SorryThatPageDoesNotExist,
     YouCannotReportYourselfForSpam,
-    ParameterIsMissing{message: String},
+    ParameterIsMissing { message: String },
     AttachmentUrlParameterIsInvalid,
     UserNotFound,
     UserHasBeenSuspended,
@@ -25,14 +25,14 @@ pub enum TwError {
     UnableToVerifyYourCredentials,
     TheSpecifiedUserIsNotFoundInThisList,
     TheUserYouAreTryingToRemoveFromThisListIsNotAMember,
-    AccountUpdateFailed{message: String},
+    AccountUpdateFailed { message: String },
     OverCapacity,
     InternalError,
     CouldNotAuthenticateYou135,
     YouHaveAlreadyFavoritedThisStatus,
     NoStatusFoundWithThatId,
     YouCannotSendMessagesToUsersWhoAreNotFollowingYou,
-    ThereWasAnErrorSendingYourMessage{message: String},
+    ThereWasAnErrorSendingYourMessage { message: String },
     YouveAlreadyRequestedToFollowTheUser,
     YouAreUnableToFollowMorePeopleAtThisTime,
     CouldNotDetermineSourceUser,
@@ -41,7 +41,7 @@ pub enum TwError {
     TweetNeedsToBeABitShorter,
     StatusIsADuplicate,
     MissingOrInvalidUrlParameter,
-    DeviceErrror{message: String},
+    DeviceErrror { message: String },
     YouAreOverTheLimitForSpamReports,
     OwnerMustAllowDmsFromAnyone,
     BadAuthenticationData,
@@ -54,7 +54,7 @@ pub enum TwError {
     AnimatedGiFsAreNotAllowedWhenUploadingMultipleImages,
     TheValidationOfMediaIdsFailed,
     AMediaIdWasNotFound,
-    VariableReturnedText{status_code: u16},
+    VariableReturnedText { status_code: u16 },
     YouHaveAlreadyRetweetedThisTweet,
     YouCannotSendMessagesToThisUser,
     TheTextOfYourDirectMessageIsOverTheMaxCharacterLimit,
@@ -169,11 +169,14 @@ impl TwErrorItemWithStatusCode {
 
     pub fn make_errors(&self) -> TwErrors {
         TwErrors {
-            errors: vec![self.error.clone()]
+            errors: vec![self.error.clone()],
         }
     }
-}
 
+    pub fn status_code(&self) -> u16 {
+        self.status_code
+    }
+}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct TwErrors {
