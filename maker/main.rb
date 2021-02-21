@@ -1,13 +1,34 @@
 require 'open-uri'
 require 'nokogiri'
 
-url = 'https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/user'
 
-doc = Nokogiri::HTML(URI.open(url))
+def user
+  url = 'https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/user'
 
-doc.xpath('//table[1]//tr').each_with_index do |tr, index|
+  doc = Nokogiri::HTML(URI.open(url))
+
+  doc.xpath('//table[1]//tr').each_with_index do |tr, index|
     next if index == 0
-    puts index
-    tr = tr.xpath('td[1]')
-    puts tr.text
+    td = tr.xpath('td[1]')
+    atribute = td.text
+    td = tr.xpath('td[2]')
+    type = td.text
+    converted_type = case type
+    when "Int64" then
+      "u64"
+    when "String" then
+      "String"
+    when "Boolean" then
+      "bool"
+    when "Int" then
+      "u64"
+    when "Array of String" then
+      "Vec<String>"
+    else
+      "XXXXXXXXXXX"
+    end
+    puts "    #{atribute}: #{converted_type},"
   end
+end
+
+user
