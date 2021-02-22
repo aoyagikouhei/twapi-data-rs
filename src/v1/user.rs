@@ -10,7 +10,7 @@ pub struct User {
     location: String,
     derived: Option<Derived>,
     entries: Option<Entries>,
-    url: String,
+    url: Option<String>,
     description: String,
     protected: bool,
     verified: bool,
