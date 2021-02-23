@@ -1,6 +1,3 @@
-
-pub mod entries;
+pub mod api;
 pub mod error;
-pub mod geo;
-pub mod tweet;
-pub mod user;
+pub mod object;

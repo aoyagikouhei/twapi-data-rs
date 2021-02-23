@@ -1,4 +1,4 @@
-use crate::v1::{
+use crate::v1::object::{
     entries::Entries,
     geo::{Place, Coordinates,},
     user::User,
@@ -296,7 +296,7 @@ mod tests {
 
         let _: Tweet = serde_json::from_str(data).unwrap();
     }
-    
+
     #[test]
     fn extended_tweet() {
         let data = r#"
@@ -406,7 +406,7 @@ mod tests {
 
         let _: Tweet = serde_json::from_str(data).unwrap();
     }
-    
+
     #[test]
     fn extended_tweet_extended() {
         let data = r#"

@@ -1,4 +1,4 @@
-use crate::v1::entries::Entries;
+use crate::v1::object::entries::Entries;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
